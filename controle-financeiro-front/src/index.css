@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Opcional: um baseline simples */
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
