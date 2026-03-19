@@ -15,7 +15,8 @@ Sistema de controle financeiro com cadastro de pessoas e gerenciamento de transa
 ### Front-end
 - React + TypeScript
 - Vite
-
+-Tailwind CSS
+- React Router DOM
 ---
 
 ## Como rodar o projeto
