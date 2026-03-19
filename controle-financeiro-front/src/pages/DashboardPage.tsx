@@ -1,5 +1,8 @@
+import { useEffect, useState } from 'react'
 import { Card, SidebarLayout, Table, type ColumnDef } from '../components'
-import { useAppStore } from '../services/appStore'
+import type { Person, Transaction } from '../models'
+import { listPeople } from '../services/peopleApi'
+import { listTransactions } from '../services/transactionsApi'
 import { formatCurrencyBRL } from '../utils/format'
 
 type TotalsByPersonRow = {
@@ -35,19 +38,27 @@ function computeTotalsByPerson(params: {
 }
 
 export function DashboardPage() {
-  const { state } = useAppStore()
+  const [people, setPeople] = useState<Person[]>([])
+  const [transactions, setTransactions] = useState<Transaction[]>([])
 
-  const totalIncome = state.transactions
+  useEffect(() => {
+    void Promise.all([listPeople(), listTransactions()]).then(([ps, txs]) => {
+      setPeople(ps)
+      setTransactions(txs)
+    })
+  }, [])
+
+  const totalIncome = transactions
     .filter((t) => t.type === 'income')
     .reduce((acc, t) => acc + t.amount, 0)
 
-  const totalExpense = state.transactions
+  const totalExpense = transactions
     .filter((t) => t.type === 'expense')
     .reduce((acc, t) => acc + t.amount, 0)
 
   const balance = totalIncome - totalExpense
 
-  const rows = computeTotalsByPerson({ people: state.people, transactions: state.transactions })
+  const rows = computeTotalsByPerson({ people, transactions })
 
   const columns: ColumnDef<TotalsByPersonRow>[] = [
     { key: 'person', header: 'Pessoa', cell: (r) => r.personName },
@@ -167,4 +178,3 @@ export function DashboardPage() {
     </SidebarLayout>
   )
 }
-
