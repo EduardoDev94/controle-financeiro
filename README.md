@@ -32,7 +32,7 @@ Sistema de controle financeiro com cadastro de pessoas e gerenciamento de transa
 
 A API estará disponível em:
 
-http://localhost:5012/
+http://localhost:5012/scalar
 
 ---
 
@@ -54,3 +54,8 @@ npm run dev
 Acesse no navegador:
 
 http://localhost:5173
+
+
+<img width="1290" height="619" alt="image" src="https://github.com/user-attachments/assets/37838d40-5d65-4a5f-826f-f5d263b56dbe" />
+<img width="1297" height="490" alt="image" src="https://github.com/user-attachments/assets/78a9b857-5943-4fc9-824a-4afc2bf87201" />
+
